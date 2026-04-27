@@ -18,7 +18,7 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        packages.libsingularity = pkgs.stdenv.mkDerivation {
+        packages.default = pkgs.stdenv.mkDerivation {
           pname = "libsingularity";
           version = "git";
 
