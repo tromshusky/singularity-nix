@@ -3,11 +3,14 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs";
   inputs.flake-utils.url = "github:numtide/flake-utils";
+  inputs.libsingularity.url = "github:singularityos-lab/libsingularity";
+  inputs.libsingularity.flake = false;
   outputs =
     {
       self,
       nixpkgs,
       flake-utils,
+      libsingularity,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -15,15 +18,11 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        packages.default = pkgs.stdenv.mkDerivation {
+        packages.libsingularity = pkgs.stdenv.mkDerivation {
           pname = "libsingularity";
           version = "git";
 
-          src = pkgs.fetchgit {
-            url = "https://github.com/singularityos-lab/libsingularity";
-            rev = "f859363a7a3840da0cbe6bb5231ab32dbc3be44d";
-            sha256 = "sha256-gh7X9MhfxxZdbC6EhK+1rRMX7qCs8eZWySCGC4nzoAM=";
-          };
+          src = libsingularity;
 
           nativeBuildInputs = with pkgs; [
             meson
