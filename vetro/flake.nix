@@ -5,7 +5,7 @@
   inputs.flake-utils.url = "github:numtide/flake-utils";
   inputs.vetro.url = "github:singularityos-lab/vetro";
   inputs.vetro.flake = false;
-  
+
   outputs =
     {
       self,
@@ -19,11 +19,12 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
-        packages.vetro = pkgs.buildGoModule {
+        packages.default = pkgs.buildGoModule {
           pname = "libsingularity";
           version = "git";
 
           src = vetro;
+          vendorHash = "sha256-BKIYil3eWmwqIUf/46LY426uBN7qrVaqWX3YvODj8gc=";
         };
       }
     );
