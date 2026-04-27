@@ -40,6 +40,11 @@
             json-glib
             libpeas2
           ];
+
+          installPhase = ''
+            mkdir -p $out/lib/pkgconfig
+            ln -s libsingularity-1.0.pc $out/lib/pkgconfig/singularity-1.0.pc
+          '';
         };
       }
     );
